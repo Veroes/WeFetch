@@ -1,2 +1,1 @@
-pub mod current_weather;
-pub mod weather;
+pub mod weather_api;

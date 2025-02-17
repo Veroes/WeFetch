@@ -1,13 +1,9 @@
-use crate::fetch::weather::WeatherResponse;
-use dotenv::dotenv;
+use crate::config::api::get_api_config;
+use crate::types::weather::WeatherResponse;
 use reqwest;
-use std::env;
 
 pub fn fetch_current_weather(city: &str) -> Result<WeatherResponse, reqwest::Error> {
-    dotenv().ok();
-
-    let base_url = env::var("BASE_URL").unwrap();
-    let api_key = env::var("API_KEY").unwrap();
+    let (base_url, api_key) = get_api_config().unwrap();
 
     let request = format!("{}/current.json?key={}&q={}", base_url, api_key, city);
 
