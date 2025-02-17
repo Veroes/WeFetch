@@ -1,4 +1,4 @@
-# ☁️🛜 WeFetch - Weather Fetcher CLI?
+# ☁️🛜 WeFetch - Weather Fetcher CLI
 
 WeFetch is a simple CLI tool built with Rust for fetching weather data from [WeatherAPI](https://www.weatherapi.com/). This project was created as a learning exercise but can be used to quickly check the weather from your terminal.
 
@@ -37,7 +37,7 @@ use `cargo run -- --help` for more options.
 
 - Display location, temperature, and condition
 
-- Simple and fast CLI experience
+- Fetch forecast weather data (soon)
 
 ## 🧩 Next Steps?
 
