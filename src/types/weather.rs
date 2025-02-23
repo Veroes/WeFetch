@@ -28,14 +28,14 @@ pub struct WeatherBase {
 }
 
 #[derive(Deserialize)]
-pub struct Day {
-    pub condition: Condition,
-}
-
-#[derive(Deserialize)]
 pub struct Current {
     #[serde(flatten)]
     pub weather: WeatherBase,
+}
+
+#[derive(Deserialize)]
+pub struct Day {
+    pub condition: Condition,
 }
 
 #[derive(Deserialize)]
@@ -45,7 +45,7 @@ pub struct Astro {
     pub moonrise: String,
     pub moonset: String,
     pub moon_phase: String,
-    pub moon_illumination: String,
+    pub moon_illumination: u8,
 }
 
 #[derive(Deserialize)]
@@ -76,7 +76,7 @@ pub struct WeatherResponse {
 
 #[derive(Deserialize)]
 pub struct ForecastResponse {
-    pub location: Location,
-    pub current: Current,
+    #[serde(flatten)]
+    pub weather_response: WeatherResponse,
     pub forecast: Forecast,
 }

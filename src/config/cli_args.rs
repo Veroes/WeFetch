@@ -21,12 +21,13 @@ pub struct CliArgs {
     #[arg(value_enum, default_value_t = Service::Current)]
     pub service: Service,
 
-    /// Number of days of forecast data (min: 1 day, max: 14 days)
-    #[arg(short, long)]
+    /// Number of days of forecast data (min: 1 day, max: 14 days / 3 days if you're using free plan)
+    #[arg(short, long, default_value = "1")]
     pub days: Option<u8>,
 }
 
 pub fn check_validity(args: CliArgs) -> Result<CliArgs, String> {
+    // City
     let city = &args.city;
 
     if !check_ascii_city(city) {
@@ -34,6 +35,20 @@ pub fn check_validity(args: CliArgs) -> Result<CliArgs, String> {
     }
 
     // Service type validity handled by clap
+
+    // Days
+    if let Some(days) = args.days {
+        if args.service != Service::Forecast && days != 1 {
+            return Err(String::from(
+                "Forecast days only available for forecast service",
+            ));
+        }
+
+        if days < 1 || days > 3 {
+            // change 14 to 3 if you're using free plan
+            return Err(String::from("Days must be between 1 and 3"));
+        }
+    }
 
     Ok(args)
 }
